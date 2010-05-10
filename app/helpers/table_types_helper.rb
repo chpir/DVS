@@ -1,0 +1,2 @@
+module TableTypesHelper
+end

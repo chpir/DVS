@@ -1,0 +1,2 @@
+- o = options_for_select(variables_select != nil ? variables_select.collect {|d| [h(d.name), d.id]} : [['Select a table', '']])
+= select_tag :variable_id, o, :size => 10

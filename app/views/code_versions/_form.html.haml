@@ -1,0 +1,16 @@
+- @jquery = '$j("#code_version_source").tabby();'
+- form_for :code_version, form, :url => {:action => 'create'} do |f|
+	%p
+		= f.label :tag
+		%br/
+		=f.text_field :tag
+	%p
+		= f.label :note
+		%br/
+		=f.text_area :note	
+	%p
+		= f.label :source
+		%br/
+		=f.text_area :source
+	%p
+		= f.submit

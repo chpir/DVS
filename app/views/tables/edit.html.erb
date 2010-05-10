@@ -1,0 +1,28 @@
+<h1>Editing table</h1>
+
+<% form_for(@table) do |f| %>
+  <%= f.error_messages %>
+
+ <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :database_id %><br />
+	<%= f.select(:database_id, @databases.collect {|d| [h(d.name), d.id]}, :prompt => true) %>
+  </p>
+  <p>
+    <%= f.label :table_type_id %><br />
+	<%= f.select(:table_type_id, TableType.all.collect {|d| [h(d.name), d.id]}, :prompt => true) %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @table %> |
+<%= link_to 'Back', tables_path %>

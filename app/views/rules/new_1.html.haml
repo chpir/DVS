@@ -1,0 +1,10 @@
+%h1 New rule: select database
+- form_tag :action => 'new_2' do
+	%p
+		Select a database: 
+		= select_tag :database_id, options_for_select(@databases.collect {|d| [h(d.name), d.id]}), :prompt => true
+	%p
+		= submit_tag 'Next -> '
+		
+		
+	

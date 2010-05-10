@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  database_id: 1
+  table_type_id: 1
+  description: MyText
+  filename: MyString
+
+two:
+  name: MyString
+  database_id: 1
+  table_type_id: 1
+  description: MyText
+  filename: MyString

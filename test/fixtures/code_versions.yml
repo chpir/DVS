@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  code_id: 1
+  source: MyText
+  tag: MyString
+  note: MyText
+
+two:
+  code_id: 1
+  source: MyText
+  tag: MyString
+  note: MyText

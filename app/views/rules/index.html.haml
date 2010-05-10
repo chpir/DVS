@@ -1,0 +1,26 @@
+%h1 rules
+
+- @database_rules.each do |database, rules|
+	%h2 Database: #{database.name} (#{database.rules.count} rules)
+	%table
+		%tr
+			%th Name
+			%th Description
+			%th Validates
+			%th Tracking #
+			%th Database
+		- rules.each do |rule|
+			%tr
+				%td #{h rule.name}
+				%td #{h rule.description}
+				%td #{h rule.validatee.variable.name} in #{h rule.validatee.variable.table.name}
+				%td #{h rule.tracking}
+				%td #{h rule.database.name}
+				%td #{ link_to 'Show', rule }
+				%td #{ link_to 'Edit', edit_rule_path(rule) }
+				%td #{ link_to 'Destroy', rule, :confirm => 'Are you sure?', :method => :delete }
+
+
+%br/
+
+= link_to 'New rule', new_rule_path

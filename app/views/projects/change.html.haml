@@ -1,0 +1,8 @@
+%h1 Change active project
+- form_tag do
+	= hidden_field_tag(:redir, params[:redir])
+	%p 
+		Project: 
+		= select_tag(:project_id, options_for_select(@projects.collect {|d| [h(d.name), d.id]}), :prompt => true)
+	%p
+		= submit_tag

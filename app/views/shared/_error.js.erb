@@ -1,0 +1,7 @@
+$j('#notice-wrap').html('<div id="jquery-<%=error['type'] -%>" class="<%='ui-state-error' unless error['type'] == 'error' -%>"><%=escape_javascript error['message'] -%></div>');
+$j('#jquery-<%=error['type'] -%>').dialog({
+						buttons: { "Ok": function() { $j(this).dialog("close"); }},
+						modal: true,
+						title: '<%= error['type'].capitalize -%>',
+						close: function(event, ui) { <%= error['close_event'] ? error['close_event'] : '' -%> }
+					});

@@ -1,0 +1,28 @@
+<h1>Editing variable</h1>
+
+<% form_for(@variable) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :table_id %><br />
+    <%= f.text_field :table_id %>
+  </p>
+  <p>
+    <%= f.label :variable_type_id %><br />
+    <%= f.text_field :variable_type_id %>
+  </p>
+  <p>
+    <%= f.label :identifier %><br />
+    <%= f.check_box :identifier %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @variable %> |
+<%= link_to 'Back', variables_path %>

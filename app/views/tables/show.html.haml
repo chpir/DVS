@@ -1,0 +1,17 @@
+%h1
+	Table:&nbsp;
+	= h @table.name
+%p
+	Database:
+	= h @table.database.name
+%p
+	Table type:
+	= h @table.table_type.name
+%p
+	Description:
+	= h @table.description
+
+%h2 Variables
+%ul
+	- @table.variables.each do |v|
+		%li #{link_to h(v.name), v}

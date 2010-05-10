@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  table_id: 1
+  variable_type_id: 1
+  identifier: false
+
+two:
+  name: MyString
+  table_id: 1
+  variable_type_id: 1
+  identifier: false

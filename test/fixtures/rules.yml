@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  tracking: 1
+  rule: MyText
+  rule_variable: MyString
+
+two:
+  name: MyString
+  description: MyText
+  tracking: 1
+  rule: MyText
+  rule_variable: MyString

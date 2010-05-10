@@ -1,0 +1,32 @@
+%h1
+	Show code
+	%span.subtitle
+		\/
+		= h @code.name
+%p
+	=h @code.description	
+
+%h2 Versions
+%table
+	%tr
+		%th Date
+		%th Tag
+		%th Note
+	- @code.code_versions.each do |v|
+		%tr
+			%td
+				= v.created_at
+			%td
+				= h v.tag
+			%td
+				= h v.note
+			%td
+				<a href="#" onclick="$j('#code_version_source_#{v.id}').modal(); return false;">display</a>
+	
+- @code.code_versions.each do |v|
+	<div id="code_version_source_#{v.id}" style="display: none;">#{h v.source}</div>
+
+
+= link_to 'Edit', edit_code_path(@code)
+|
+= link_to 'Back', codes_path

@@ -1,0 +1,142 @@
+%h1 New rule for database #{@database.name}
+
+:ruby
+	jquery <<-EOM
+	
+	// instantiate dialogs
+	$j('#already-added-dialog').dialog( { autoOpen: false, title: 'Error', dialogClass: 'alert', modal: true,  buttons: { "Ok": function() { $j(this).dialog("close");} }} );
+	$j('#select-table-dialog').dialog( { autoOpen: false, title: 'Error', dialogClass: 'alert', modal: true,  buttons: { "Ok": function() { $j(this).dialog("close");} }} );
+	$j('#only-one-validatee').dialog( { autoOpen: false, title: 'Error', dialogClass: 'alert', modal: true,  buttons: { "Ok": function() { $j(this).dialog("close");} }} );
+	$j('#must-have-validatee').dialog( { autoOpen: false, title: 'Error', dialogClass: 'alert', modal: true,  buttons: { "Ok": function() { $j(this).dialog("close");} }} );
+	
+	EOM
+	
+	j = <<-EOM
+		
+	
+	function addVariable() {
+		if($j('#variable_id').val() == null) {
+			$j('#select-table-dialog').dialog('open');
+		}
+		else {
+			if ($j('#member_variable_'+$j('#variable_id').val()).length > 0) {
+				$j('#already-added-dialog').dialog('open');
+			}
+			else if($j('#member-variables .Validatee').length > 0 && $j('#member_variable_type_id option[value="'+$j('#member_variable_type_id').val()+'"]').text() == "Validatee") {
+				$j('#only-one-validatee').dialog('open');
+			}
+			else {
+				$j('#member-variables').append('<li class="'
+					+ $j('#member_variable_type_id option[value="'+$j('#member_variable_type_id').val()+'"]').text()
+					+'" id="member_variable_'
+					+ $j('#variable_id').val()
+					+ '">'
+					+ $j('#table_id option[value="'+$j('#table_id').val()+'"]').text()
+					+ '&nbsp;/&nbsp;'
+					+ $j('#variable_id option[value="'+$j('#variable_id').val()+'"]').text()
+					+ ' ('
+					+ $j('#member_variable_type_id option[value="'+$j('#member_variable_type_id').val()+'"]').text()
+					+ ") [<a href=\\"#\\" onclick=\\"$j('#member_variable_"
+					+ $j('#variable_id').val()
+					+ "').remove(); return false;\\">remove</a>]</li>");
+			}
+		}
+	}
+	
+	function sendRule() {
+		if($j('#member_variable_container').children().size() == 0) {
+			$j('#must-have-validatee').dialog('open');
+		}
+		$j('#member_variable_container').children().remove();
+		
+		var has_validatee = false;
+		$j('#member-variables').children().each(function() {
+				var t = $j(this);
+				if(t.attr('class') == "Validatee") {
+				has_validatee = true;
+				}
+	       		$j('#member_variable_container').append('<input type="hidden" name="member_variable[]" value="'+t.attr('id')+'" />');
+				$j('#member_variable_container').append('<input type="hidden" name="'+t.attr('id')+'" value="'+t.attr('class')+'" />');
+		});
+		if(!has_validatee) {
+			$j('#must-have-validatee').dialog('open');
+			return false;
+		}
+		else {
+			/*$j.post('/rules/create', $j('#rule_form').serialize(), null, "script");*/
+			$j('#rule_form').submit();
+			return false;
+		}
+	}
+	
+	
+	
+	EOM
+	javascript j
+	
+%h2 Select table columns to include in the rule
+.new-rule
+	.select-container
+		%b Table:
+		%br/
+		= select_tag :table_id, options_for_select(@database.tables.collect {|d| [h(d.name), d.id]}), :size => 10
+	.select-container
+		%b Variable:
+		%br/
+		%span{:id => 'variables-select'}
+			= render :partial => 'rules/form/variables_select', :object => nil
+	.other-element-container
+		%b Member variable type:
+		%br/
+		= select_tag :member_variable_type_id, options_for_select(@member_variable_types.collect {|d| [h(d.name.titleize), d.id]})
+		%br/
+		%br/
+		%button{:onclick => 'addVariable(); return false;'} Add variable
+	#clear-both
+%ul#member-variables
+
+.hidden-dialog{:id=>'select-table-dialog'}
+	You must select a table and variable before you try to add a member variable.
+
+.hidden-dialog{:id=>'already-added-dialog'}
+	This variable has already been added as a member of the rule.
+
+.hidden-dialog{:id=>'only-one-validatee'}
+	You can only have one validatee.
+	
+.hidden-dialog{:id=>'must-have-validatee'}
+	You must have a validatee.
+
+- form_tag '/rules/create', :method => 'post', :id => 'rule_form' do
+	= hidden_field_tag :database_id, @database.id
+	%h2 Select code to use for the rule
+	- @codes.each do |c|
+		%p
+			= radio_button_tag 'code_id', c.id
+			= h c.name
+			=link_to 'show source', '#', :onclick => '$j("#code_version_source_'+c.id.to_s+'").modal(); return false;'
+			<div id="code_version_source_#{c.id}" style="display: none;"><textarea style="width: 100%; height: 300px;">#{h c.latest_source}</textarea></div>
+		
+	%h2 Enter some information
+	%p
+		= label_tag :name
+		%br/
+		= text_field_tag :name
+	%p
+		= label_tag :tracking
+		%br/
+		= text_field_tag :tracking
+	%p
+		= label_tag :description
+		%br/
+		= text_area_tag :description
+
+	%p
+		= submit_tag "Create rule", :onclick => "sendRule(); return false;"
+	#member_variable_container
+
+
+= observe_field :table_id, :url => {:controller => 'rules', :action => 'ajax_get_variables_by_table'}, :with => :table_id
+
+= observe_field :table_id, :function => "$j('#variable_id').attr('disabled', true);"
+

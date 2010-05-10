@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @variable.name %>
+</p>
+
+<p>
+  <b>Table:</b>
+  <%=h @variable.table_id %>
+</p>
+
+<p>
+  <b>Variable type:</b>
+  <%=h @variable.variable_type_id %>
+</p>
+
+<p>
+  <b>Identifier:</b>
+  <%=h @variable.identifier %>
+</p>
+
+
+<%= link_to 'Edit', edit_variable_path(@variable) %> |
+<%= link_to 'Back', variables_path %>

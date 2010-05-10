@@ -1,0 +1,36 @@
+<h1>Editing rule</h1>
+
+<% form_for(@rule) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :tracking %><br />
+    <%= f.text_field :tracking %>
+  </p>
+  <p>
+    <%= f.label :rule %><br />
+    <%= f.text_area :rule %>
+  </p>
+  <p>
+    <%= f.label :rule_variable %><br />
+    <%= f.text_field :rule_variable %>
+  </p>
+  <p>
+    <%= f.label :database_id %><br />
+    <%= f.text_field :database_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @rule %> |
+<%= link_to 'Back', rules_path %>

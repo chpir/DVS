@@ -1,0 +1,26 @@
+<h1>Listing variables</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Table</th>
+    <th>Variable type</th>
+    <th>Identifier</th>
+  </tr>
+
+<% @variables.each do |variable| %>
+  <tr>
+    <td><%=h variable.name %></td>
+    <td><%=h variable.table_id %></td>
+    <td><%=h variable.variable_type_id %></td>
+    <td><%=h variable.identifier %></td>
+    <td><%= link_to 'Show', variable %></td>
+    <td><%= link_to 'Edit', edit_variable_path(variable) %></td>
+    <td><%= link_to 'Destroy', variable, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New variable', new_variable_path %>

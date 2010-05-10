@@ -1,0 +1,21 @@
+%h1 Listing tables
+- @database_tables.each do |database, tables|
+	%h2 Database: #{database.name} (#{database.tables.count} tables)
+	%table
+		%tr
+			%th Name
+			%th Table type
+			%th Description
+		
+		- tables.each do |table|
+			%tr
+				%td #{h table.name }
+				%td #{h table.table_type.name }
+				%td #{h table.description }
+				%td #{ link_to 'Show', table }
+				%td #{ link_to 'Edit', edit_table_path(table) }
+				%td #{ link_to 'Destroy', table, :confirm => 'Are you sure?', :method => :delete }
+
+<br />
+
+= link_to 'New table', new_table_path
