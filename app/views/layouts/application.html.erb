@@ -50,15 +50,21 @@
 	</div>
 <img src="http://www.globalhealth.duke.edu/chp/images/logo_chp.jpg" style="float: right; width: 296px;"/>
 <div style="clear: both;"></div>
-<div id="menu">
+<div id="menu"><b>Navigation:</b>
+	<% controllers = %w{projects databases tables rules runs rounds instruments questions regularexps} %>
+	<% controllers.each_with_index do |c,i| %>
+		<%= " / " if i != 0 -%><%= link_to_unless_current c.titleize, :controller => c, :action => 'index' %>
+	<% end %>
+	<!--
 	<ul>
 		<li style="font-weight: normal;">Navigation:</li>
 		<% controllers = %w{projects databases tables table_types variables variable_types rules runs member_variables member_variable_types exceptions exception_values} %>
-		<% controllers.each do |c| %>
+		<% controllers.each_with_index do |c,i| %>
 		<li><%= link_to_unless_current c.titleize, :controller => c, :action => 'index' %></li>
 		<% end %>
 	</ul>
 	<div style="clear: both;"></div>
+	-->
 </div>
 
 <div id="content">

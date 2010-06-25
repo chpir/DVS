@@ -45,8 +45,12 @@ img {
 	margin-top: 1em;
 	padding: 0.25em;
 	background-color: #aaa;
+	font-size: 0.95em;
+	color: white;
+	font-weight: bold;
 }
 
+/*
 #menu ul {
 	padding: 0; margin: 0;
 }
@@ -58,6 +62,7 @@ img {
 	color: white;
 	font-weight: bold;
 }
+*/
 
 #content {
 	margin: 1em 0 1em 0;
@@ -131,6 +136,17 @@ img {
 /* clear both */
 #clear-both {
 	clear: both;
+}
+
+#preview {
+	margin: 1em;
+	border: 1px dotted #666;
+	padding: 0.5em;
+	font-family: menlo, "courier new";
+}
+
+#preview span {
+font-weight: bold;	
 }
 
 /* New rule formatting */
@@ -218,10 +234,10 @@ a:visited { color: #000; text-decoration: underline;}
 a:hover { color: #fff; background-color: #000; text-decoration: none;}
 a:active { color: #000; text-decoration: underline;}
 
-#menu ul li a:link { color: #fff; text-decoration: underline;}
-#menu ul li a:visited { color: #fff; text-decoration: underline;}
-#menu ul li a:hover { color: #fff; background-color: #aaa; text-decoration: none;}
-#menu ul li a:active { color: #fff; text-decoration: underline;}
+#menu a:link { color: #fff; text-decoration: underline;}
+#menu a:visited { color: #fff; text-decoration: underline;}
+#menu a:hover { color: #fff; background-color: #aaa; text-decoration: none;}
+#menu a:active { color: #fff; text-decoration: underline;}
 
 h1 a:link { color: #194f8d; text-decoration: underline;}
 h1 a:visited { color: #194f8d; text-decoration: underline;}

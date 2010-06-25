@@ -1,0 +1,9 @@
+one:
+  name: MyString
+  rule: MyText
+  description: MyText
+
+two:
+  name: MyString
+  rule: MyText
+  description: MyText

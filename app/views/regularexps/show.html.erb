@@ -1,0 +1,20 @@
+<% title "Regularexp" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @regularexp.name %>
+</p>
+<p>
+  <strong>Rule:</strong>
+  <%=h @regularexp.rule %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @regularexp.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_regularexp_path(@regularexp) %> |
+  <%= link_to "Destroy", @regularexp, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", regularexps_path %>
+</p>

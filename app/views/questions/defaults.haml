@@ -1,0 +1,12 @@
+- form_tag :action => :defaults do
+	Instrument:
+	%br/
+	= grouped_collection_select(:instrument, :id, @rounds, :instruments, :name, :id, :name)
+	%br/
+	%br/
+	Table:
+	%br/
+	= grouped_collection_select(:table, :id, @databases, :tables, :name, :id, :name)
+	%br/
+	%br/
+	= submit_tag

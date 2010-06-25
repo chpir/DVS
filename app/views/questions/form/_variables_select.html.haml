@@ -1,0 +1,12 @@
+= collection_select :question, :variable_id, variables_select, :id, :name, {}, {:size => 10}
+= observe_field :question_variable_id, :url => {:controller => 'questions', :action => 'ajax_get_variable'}, :with => :variable_id
+
+<script language="javascript">
+$j('#question_variable_id').change(function() {
+$j('#preview .variable').html($j('#question_variable_id :selected').text());
+});
+
+$j('#table_id').change(function() {
+$j('#preview .variable').html('VARIABLE');
+});
+</script>

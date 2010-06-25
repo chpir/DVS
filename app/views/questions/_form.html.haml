@@ -1,0 +1,77 @@
+:ruby
+	jquery <<-EOF
+	/*
+	$j('#question_regularexp_id').change(function() {
+		$j('#preview .regexp').html($j('#question_regularexp_id :selected').text());
+	});
+		*/
+	
+	$j('#question_conditional').each(function() {
+	   // Save current value of element
+	   $j(this).data('oldVal', $j(this));
+
+	   // Look for changes in the value
+	   $j(this).bind("propertychange keyup input paste", function(event){
+	      // If value has changed...
+	      if ($j(this).data('oldVal') != $j(this).val()) {
+	       // Updated stored value
+	       $j(this).data('oldVal', $j(this).val());
+
+	       // Do action
+			if ($j(this).val() == "") {
+			$j('#preview .conditional').html("CONDITIONAL");
+			}
+			else {
+			$j('#preview .conditional').html($j(this).val());
+			}
+	     }
+	   });
+	 });
+
+	EOF
+- form_for @question do |f|
+	= f.error_messages
+	%p
+		= f.label :instrument_id
+		= grouped_collection_select(:question, :instrument_id, @rounds, :instruments, :name, :id, :name)
+	%p
+		.new-rule
+			.select-container
+				%b Table:
+				%br/
+				= select_tag :table_id, options_for_select(@database.tables.collect {|d| [h(d.name), d.id]},@table.id), :size => 10
+			.select-container
+				%b Variable:
+				%br/
+				%span{:id => 'variables-select'}
+					= render :partial => 'questions/form/variables_select', :object => @table.variables
+			#clear-both
+	%p
+		= f.label :regularexp_id
+		%br/
+		= collection_select(:question, :regularexp_id, @regularexp, :id, :name, {:prompt => true})
+	%p
+		= label :variable, :variable_type
+		#variable-type
+			= render :partial => 'questions/form/variable_type', :object => nil
+	%p
+		= f.label :conditional
+		%br/
+		= f.text_area :conditional, :style => "height: 4em;"
+	%p
+	= f.submit
+
+%p
+	Preview:
+	#preview
+		gen <span class="variable">VARIABLE</span>_invalid = 0<br/>
+		replace <span class="variable">VARIABLE</span>_invalid = 1 if(<span class="conditional">CONDITIONAL</span>)<br/>
+		tostring <span class="variable">VARIABLE</span>, gen <span class="variable">VARIABLE</span>_str<br/>
+		replace <span class="variable">VARIABLE</span>_invalid = 1 if(regexm(<span class="variable">VARIABLE</span>_str,"<span class="regexp">REGEXP</span>")
+		
+
+
+
+= observe_field :table_id, :url => {:controller => 'questions', :action => 'ajax_get_variables_by_table'}, :with => :table_id
+
+= observe_field :table_id, :function => "$j('#question_variable_id').attr('disabled', true);"

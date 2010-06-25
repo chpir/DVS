@@ -1,0 +1,24 @@
+<% title "Instrument" %>
+
+<p>
+  <strong>Round:</strong>
+  <%=h @instrument.round_id %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%=h @instrument.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @instrument.description %>
+</p>
+<p>
+  <strong>Keys:</strong>
+  <%=h @instrument.keys %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_instrument_path(@instrument) %> |
+  <%= link_to "Destroy", @instrument, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", instruments_path %>
+</p>

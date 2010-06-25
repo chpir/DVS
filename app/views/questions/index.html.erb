@@ -1,0 +1,23 @@
+<% title "Questions" %>
+
+<table>
+  <tr>
+    <th>Instrument</th>
+    <th>Variable</th>
+    <th>Regexp</th>
+    <th>Conditional</th>
+  </tr>
+  <% for question in @questions %>
+    <tr>
+      <td><%=h question.instrument_id %></td>
+      <td><%=h question.variable_id %></td>
+      <td><%=h question.regularexp_id %></td>
+      <td><%=h question.conditional %></td>
+      <td><%= link_to "Show", question %></td>
+      <td><%= link_to "Edit", edit_question_path(question) %></td>
+      <td><%= link_to "Destroy", question, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Question", new_question_path %> / <%= link_to "Set Default Instrument", :action => :defaults %></p>

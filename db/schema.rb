@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100507223230) do
+ActiveRecord::Schema.define(:version => 20100625042321) do
 
   create_table "code_versions", :force => true do |t|
     t.integer  "code_id"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20100507223230) do
     t.datetime "updated_at"
   end
 
+  create_table "instruments", :force => true do |t|
+    t.integer  "round_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "keys"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "member_variable_types", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -70,6 +79,30 @@ ActiveRecord::Schema.define(:version => 20100507223230) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "instrument_id"
+    t.integer  "variable_id"
+    t.integer  "regularexp_id"
+    t.text     "conditional"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regularexps", :force => true do |t|
+    t.string   "name"
+    t.text     "rule"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rounds", :force => true do |t|
+    t.string   "name"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

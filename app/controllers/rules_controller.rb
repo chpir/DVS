@@ -44,17 +44,6 @@ class RulesController < ApplicationController
     end
   end
 
-  # GET /rules/new
-  # GET /rules/new.xml
-  def new
-    @rule = Rule.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @rule }
-    end
-  end
-
   # GET /rules/1/edit
   def edit
     @rule = Rule.find(params[:id])

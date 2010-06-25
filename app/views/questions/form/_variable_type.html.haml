@@ -1,0 +1,5 @@
+- if variable_type == nil
+	Select a variable...
+- else
+	- @variable = variable_type
+	= collection_select(:variable, :variable_type_id, VariableType.all, :id, :name)

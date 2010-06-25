@@ -1,0 +1,21 @@
+<% title "Regularexps" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Rule</th>
+    <th>Description</th>
+  </tr>
+  <% for regularexp in @regularexps %>
+    <tr>
+      <td><%=h regularexp.name %></td>
+      <td><%=h regularexp.rule %></td>
+      <td><%=h regularexp.description %></td>
+      <td><%= link_to "Show", regularexp %></td>
+      <td><%= link_to "Edit", edit_regularexp_path(regularexp) %></td>
+      <td><%= link_to "Destroy", regularexp, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Regularexp", new_regularexp_path %></p>
