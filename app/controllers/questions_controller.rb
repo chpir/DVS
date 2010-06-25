@@ -22,12 +22,19 @@ class QuestionsController < ApplicationController
   end
   
   def new
+    
     # Make sure defaults are set because we need it for the database
-    redirect_to :action => :defaults if !session[:default_instrument] or !session[:default_table]
+    if (!session[:default_instrument] or !session[:default_table])
+      instrument = Instrument.first
+      @table = Table.first
+    else
+      instrument = Instrument.find(session[:default_instrument])      
+      @table = Table.find(session[:default_table])
+    end
     
     # Load from defaults
-    instrument = Instrument.find(session[:default_instrument])
-    @table = Table.find(session[:default_table])
+
+    
     @database = @table.database
     
     
