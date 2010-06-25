@@ -20,9 +20,11 @@
 	       // Do action
 			if ($j(this).val() == "") {
 			$j('#preview .conditional').html("CONDITIONAL");
+			$j('#preview #conditional-line').hide();
 			}
 			else {
 			$j('#preview .conditional').html($j(this).val());
+			$j('#preview #conditional-line').show();
 			}
 	     }
 	   });
@@ -65,13 +67,17 @@
 	Preview:
 	#preview
 		gen <span class="variable">VARIABLE</span>_invalid = 0<br/>
-		replace <span class="variable">VARIABLE</span>_invalid = 1 if(<span class="conditional">CONDITIONAL</span>)<br/>
-		tostring <span class="variable">VARIABLE</span>, gen <span class="variable">VARIABLE</span>_str<br/>
-		replace <span class="variable">VARIABLE</span>_invalid = 1 if(regexm(<span class="variable">VARIABLE</span>_str,"<span class="regexp">REGEXP</span>")
+		<div id="conditional-line" style="display: none;">replace <span class="variable">VARIABLE</span>_invalid = 1 if(<span class="conditional">CONDITIONAL</span>)</div>
+		gen <span class="variable">VARIABLE</span>_str = <span class="variable">VARIABLE</span><br/>
+		capture tostring <span class="variable">VARIABLE</span>_str, replace<br/>
+		replace <span class="variable">VARIABLE</span>_invalid = 1 if(regexm(<span class="variable">VARIABLE</span>_str,"<span class="regularexp">REGEXP</span>")
 		
 
 
 
 = observe_field :table_id, :url => {:controller => 'questions', :action => 'ajax_get_variables_by_table'}, :with => :table_id
+
+= observe_field :question_regularexp_id, :url => {:controller => 'questions', :action => 'ajax_get_regularexp'}, :with => :question_regularexp_id
+
 
 = observe_field :table_id, :function => "$j('#question_variable_id').attr('disabled', true);"

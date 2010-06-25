@@ -45,11 +45,20 @@ class QuestionsController < ApplicationController
       page.replace_html 'variables-select', :partial => 'questions/form/variables_select', :object => variables
     end
   end
-  
+    
   def ajax_get_variable
     variable = Variable.find(params[:variable_id])
     render :update do |page|
       page.replace_html 'variable-type', :partial => 'questions/form/variable_type', :object => variable
+    end
+  end
+  
+  def ajax_get_regularexp
+    regularexp = Regularexp.find(params[:question_regularexp_id])
+    coder = HTMLEntities.new
+    rule = coder.encode(regularexp.rule)
+    render :update do |page|
+      page << "$j('.regularexp').html(\"#{rule}\");"
     end
   end
   
