@@ -1,6 +1,6 @@
 :ruby
 	content = <<-EOF
-	capture label define validation .s "Skip" .b "Blank" .u "Unknown" .i "Invalid by regexp"><br/>
+	capture label define validation .s "Skip" .b "Blank" .u "Unknown" .i "Invalid by regexp"<br/>
 	generate <span class="variable">VARIABLE</span>_should_validate = 1<span id="conditional-line" style="display: none;"> if(<span class="conditional">CONDITIONAL</span>)</span><br/>
 	if <span class="variable">VARIABLE</span>_should_validate == 1 {<br/>
 		&nbsp;&nbsp;generate <span class="variable">VARIABLE</span>_str = <span class="variable">VARIABLE</span><br/>
