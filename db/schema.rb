@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100625042321) do
+ActiveRecord::Schema.define(:version => 20100625061844) do
 
   create_table "code_versions", :force => true do |t|
     t.integer  "code_id"
@@ -40,14 +40,6 @@ ActiveRecord::Schema.define(:version => 20100625042321) do
     t.integer  "exception_id"
     t.integer  "variable_id"
     t.text     "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "exceptions", :force => true do |t|
-    t.integer  "rule_id"
-    t.string   "rule_type"
-    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,6 +143,14 @@ ActiveRecord::Schema.define(:version => 20100625042321) do
     t.string   "persistence_token",   :null => false
     t.string   "single_access_token", :null => false
     t.string   "perishable_token",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "validation_exceptions", :force => true do |t|
+    t.integer  "rule_id"
+    t.string   "rule_type"
+    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

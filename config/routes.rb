@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'questions/defaults', :controller => :questions, :action => :defaults
     
   map.resources :user_sessions, :users
-  map.resources :databases, :exception_values, :exceptions, :member_variable_types, :member_variables, :projects, :runs, :table_types, :variable_types, :variables, :rounds, :instruments, :questions, :regularexps
+  map.resources :databases, :exception_values, :validation_exceptions, :member_variable_types, :member_variables, :projects, :runs, :table_types, :variable_types, :variables, :rounds, :instruments, :questions, :regularexps
   
   map.resources :tables, :collection => {:batch_create => :post}
   map.resources :rules, :collection => {:new_1 => :get, :new_2 => :post}
