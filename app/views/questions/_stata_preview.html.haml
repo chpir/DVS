@@ -1,0 +1,23 @@
+:ruby
+	content = <<-EOF
+	capture label define validation .s "Skip" .b "Blank" .u "Unknown" .i "Invalid by regexp"
+	generate <span class="variable">VARIABLE</span>_should_validate = 1<span id="conditional-line" style="display: none;"> if(<span class="conditional">CONDITIONAL</span>)</span><br/>
+	if <span class="variable">VARIABLE</span>_should_validate == 1 {<br/>
+		&nbsp;&nbsp;generate <span class="variable">VARIABLE</span>_str = <span class="variable">VARIABLE</span><br/>
+		&nbsp;&nbsp;capture tostring <span class="variable">VARIABLE</span>_str, replace<br/>
+		<br/>
+		&nbsp;&nbsp;generate <span class="variable">VARIABLE</span>_valid = 1<br/>
+		&nbsp;&nbsp;replace <span class="variable">VARIABLE</span>_valid = .b if <span class="variable">VARIABLE</span>_str == ""<br/>
+		&nbsp;&nbsp;replace <span class="variable">VARIABLE</span>_valid = .u if inlist(lower(<span class="variable">VARIABLE</span>_str), "uk", "unknown")<br/>
+		&nbsp;&nbsp;replace <span class="variable">VARIABLE</span>_valid = .i if regexm(<span class="variable">VARIABLE</span>_str, "<span class="regularexp">REGEXP</span>") == 0<br/>
+	}<br/>
+	else {<br/>
+		&nbsp;&nbsp;generate <span class="variable">VARIABLE</span>_valid = .s<br/>
+	}<br/>
+	label values <span class="variable">VARIABLE</span>_valid validation
+	EOF
+	
+	%w{variable conditional regexp}.each {|v| content[v.upcase] = stata_preview[v] if stata_preview[v]}
+
+= content
+	

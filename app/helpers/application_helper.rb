@@ -9,9 +9,14 @@ module ApplicationHelper
     @jquery = t
   end
   
+  def javascript_head(t)
+    @javascript = t
+  end
+
   def javascript(t)
     @javascript = t
   end
+
   
   # TODO duplicated in application controller
   def get_project

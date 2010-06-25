@@ -29,8 +29,8 @@
 	     }
 	   });
 	 });
-
 	EOF
+	
 - form_for @question do |f|
 	= f.error_messages
 	%p
@@ -66,11 +66,7 @@
 %p
 	Preview:
 	#preview
-		gen <span class="variable">VARIABLE</span>_invalid = 0<br/>
-		<div id="conditional-line" style="display: none;">replace <span class="variable">VARIABLE</span>_invalid = 1 if(<span class="conditional">CONDITIONAL</span>)</div>
-		gen <span class="variable">VARIABLE</span>_str = <span class="variable">VARIABLE</span><br/>
-		capture tostring <span class="variable">VARIABLE</span>_str, replace<br/>
-		replace <span class="variable">VARIABLE</span>_invalid = 1 if(regexm(<span class="variable">VARIABLE</span>_str,"<span class="regularexp">REGEXP</span>")
+		= render :partial => 'stata_preview', :object => {}
 		
 
 
@@ -81,3 +77,16 @@
 
 
 = observe_field :table_id, :function => "$j('#question_variable_id').attr('disabled', true);"
+
+:plain
+	<script language="javascript">
+	/*
+	var clip = new ZeroClipboard.Client();
+	clip.setText( '' ); // will be set later on mouseDown
+	clip.setHandCursor( true );
+	clip.addEventListener( 'mouseDown', function(client) { 
+		clip.setText( document.getElementById('preview').value );
+		} );
+	clip.glue( 'preview' );
+	*/
+	</script>
