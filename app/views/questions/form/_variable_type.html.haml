@@ -2,4 +2,4 @@
 	Select a variable...
 - else
 	- @variable = variable_type
-	= collection_select(:variable, :variable_type_id, VariableType.all, :id, :name)
+	= collection_select(:variable, :variable_type_id, VariableType.all, :id, :name, {:prompt => true})

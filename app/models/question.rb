@@ -6,4 +6,6 @@ class Question < ActiveRecord::Base
   acts_as_list :scope => :instrument
   
   attr_accessible :instrument_id, :variable_id, :regexp_id, :conditional
+  
+  validates_presence_of :regularexp
 end

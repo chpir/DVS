@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
     
     
     @rounds = get_project.rounds.all
-    @regularexp = Regularexp.all
+    @regularexp = Regularexp.all(:order => :name)
     @variable_types = VariableType.all
     
     @question = Question.new
@@ -75,10 +75,19 @@ class QuestionsController < ApplicationController
   end
   
   def create
-    variable = Variable.find(params[:question][:variable_id])
-    variable.variable_type = VariableType.find(params[:variable][:variable_type_id])
-    variable.save
+    
     @question = Question.new(params[:question])
+    
+    
+    if params[:question][:variable_id] && !params[:question][:variable_id].blank? && params[:variable][:variable_type_id] && !params[:variable][:variable_type_id].blank?
+      variable = Variable.find(params[:question][:variable_id])
+      variable.variable_type = VariableType.find(params[:variable][:variable_type_id])
+      variable.save
+    else
+       raise MissingVariableType
+     end
+    
+
   
     # TODO why does this line have to be here? Won't set regexp_id without it :(
     @question.regularexp_id = params[:question][:regularexp_id]
@@ -89,7 +98,20 @@ class QuestionsController < ApplicationController
     else
       render :action => 'new'
     end
+  rescue MissingVariableType => err
+    flash[:notice] = "Invalid form submission: #{err.clean_message}"
+    redirect_to @question
   end
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   def edit
     @question = Question.find(params[:id])
@@ -113,3 +135,6 @@ class QuestionsController < ApplicationController
     redirect_to questions_url
   end
 end
+
+
+class MissingVariableType < StandardError; end

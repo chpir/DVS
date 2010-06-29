@@ -1,6 +1,6 @@
 class RegularexpsController < ApplicationController
   def index
-    @regularexps = Regularexp.all
+    @regularexps = Regularexp.all(:order => :name)
   end
   
   def show
