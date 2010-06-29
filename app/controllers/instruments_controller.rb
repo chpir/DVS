@@ -12,6 +12,18 @@ class InstrumentsController < ApplicationController
     @rounds = Round.all
   end
   
+  def questions
+    @instrument = Instrument.find(params[:id])
+  end
+  
+  def sort_questions
+    @instrument = Instrument.find(params[:id])
+    @instrument.questions.each do | f |
+      f.position = params['question-list'].index(f.id.to_s)+1
+      f.save
+    end
+  end
+  
   def create
     @instrument = Instrument.new(params[:instrument])
     if @instrument.save

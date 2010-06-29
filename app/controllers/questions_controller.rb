@@ -16,9 +16,14 @@ class QuestionsController < ApplicationController
       @databases = get_project.databases.all
     end
   end
+
   
   def show
     @question = Question.find(params[:id])
+  end
+  
+  def export
+    
   end
   
   def new

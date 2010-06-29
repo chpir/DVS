@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100625061844) do
+ActiveRecord::Schema.define(:version => 20100629135559) do
 
   create_table "code_versions", :force => true do |t|
     t.integer  "code_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20100625061844) do
     t.text     "conditional"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "regularexps", :force => true do |t|
@@ -126,13 +127,25 @@ ActiveRecord::Schema.define(:version => 20100625061844) do
   end
 
   create_table "tables", :force => true do |t|
+    t.string   "table_catalog"
     t.string   "name"
+    t.string   "table_schema"
+    t.string   "table_name"
     t.integer  "database_id"
+    t.string   "table_type"
     t.integer  "table_type_id"
+    t.string   "self_referencing_column_name"
     t.text     "description"
     t.string   "filename"
+    t.string   "reference_generation"
+    t.string   "user_defined_type_catalog"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_defined_type_schema"
+    t.string   "user_defined_type_name"
+    t.string   "is_insertable_into"
+    t.string   "is_typed"
+    t.string   "commit_action"
   end
 
   create_table "users", :force => true do |t|
