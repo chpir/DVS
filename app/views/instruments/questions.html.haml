@@ -1,0 +1,9 @@
+%ol#question-list
+	- @instrument.questions.each do |q|
+		%li{:id => "question_#{q.id}"}
+			= link_to (h(q.variable.table.name), table_path(q.variable.table))
+			= "::"
+			= link_to (h(q.variable.name), variable_path(q.variable.name))
+			= "("+link_to ('Question', question_path(q))+"): " + h(q.regularexp.name) + " ("+ h(q.regularexp.rule)+") "
+			
+= sortable_element "question-list", :url => {:action => :sort_questions, :id => @instrument}, :complete => visual_effect(:highlight, 'question-list')
