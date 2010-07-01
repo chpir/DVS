@@ -122,6 +122,11 @@ class QuestionsController < ApplicationController
     flash[:notice] = "Successfully destroyed question."
     redirect_to questions_url
   end
+  
+  private
+    def single_access_allowed?
+      action_name == "export"
+    end
 end
 
 
