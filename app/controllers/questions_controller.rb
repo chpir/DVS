@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
   end
   
   def export
-    
+    @rounds = Round.all(:include => {:instruments => {:questions => [:regularexp, {:variable => :table}]}})
   end
   
   def new
@@ -75,10 +75,8 @@ class QuestionsController < ApplicationController
   end
   
   def create
-    
     @question = Question.new(params[:question])
-    
-    
+
     if params[:question][:variable_id] && !params[:question][:variable_id].blank? && params[:variable][:variable_type_id] && !params[:variable][:variable_type_id].blank?
       variable = Variable.find(params[:question][:variable_id])
       variable.variable_type = VariableType.find(params[:variable][:variable_type_id])
@@ -88,7 +86,6 @@ class QuestionsController < ApplicationController
      end
     
 
-  
     # TODO why does this line have to be here? Won't set regexp_id without it :(
     @question.regularexp_id = params[:question][:regularexp_id]
     
@@ -103,15 +100,6 @@ class QuestionsController < ApplicationController
     redirect_to @question
   end
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   def edit
     @question = Question.find(params[:id])
