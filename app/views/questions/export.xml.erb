@@ -4,7 +4,7 @@
 		<% r.instruments.each do |i| %>
 		<instrument id="<%= i.id -%>" name="<%= i.name -%>">
 			<% i.questions.each do |q| %>
-			<question id="<%= q.id -%>" table_id="<%= q.variable.table.id -%>" table_name="<%= q.variable.table.name -%>" variable_id="<%= q.variable.id -%>" variable_name="<%= q.variable.name -%>">
+			<question id="<%= q.id -%>" table_id="<%= q.variable.table.id -%>" table_name="<%= q.variable.table.name -%>" variable_id="<%= q.variable.id -%>" variable_name="<%= q.variable.name -%>" variable_type="<%= q.variable.variable_type.name -%>">
 				<regexp id="<%= q.regularexp.id -%>"><%= q.regularexp.rule -%></regexp>
 			</question>
 			<% end %>

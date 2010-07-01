@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
   end
   
   def export
-    @rounds = Round.all(:include => {:instruments => {:questions => [:regularexp, {:variable => :table}]}})
+    @rounds = Round.all(:include => {:instruments => {:questions => [:regularexp, {:variable => [:table, :variable_type]}]}})
   end
   
   def new
